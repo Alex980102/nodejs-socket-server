@@ -1,13 +1,19 @@
 // Third party imports
 const {response, request} = require("express");
-const {validationResult} = require("express-validator");
 // Third party imports
 
+// Local imports
+const User = require('../models/user.model')
+// Local Imports
 
-const createUser = (req = request, res = response) => {
+const createUser = async (req = request, res = response) => {
+    
+    const user = new User(req.body);
+    await user.save();
+
     res.json({
         ok: true,
-        msg: 'User Created!!'
+        body: req.body,
     });
 }
 
