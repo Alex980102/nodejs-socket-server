@@ -1,0 +1,14 @@
+{
+    "source": {
+        "excludePattern": "(node_modules|docs)",
+        "include": ["controllers", "database", "helpers", "middlewares", "models", "routes", "sockets","index.js"]
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    },
+    "opts":{
+        "recurse":"true",
+        "destination": "./docs" 
+    }
+}
