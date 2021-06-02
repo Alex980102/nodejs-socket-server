@@ -1,4 +1,4 @@
-# Nodejs Socket server - dev
+# Nodejs Socket server
 
 ## 1._ First we need to create the `.env` 
 
