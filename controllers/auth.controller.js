@@ -8,6 +8,7 @@ const User = require('../models/user.model');
 const { generateJWT } = require("../helpers/jwt.helper");
 // Local Imports
 
+// Create New User
 const createUser = async (req = request, res = response) => {
 
     const {email, password} = req.body;
@@ -43,7 +44,7 @@ const createUser = async (req = request, res = response) => {
         });
 
     } catch (error) {
-        console.error(error);
+        console.log(error);
         res.status(500).json({
             ok: false,
             msg: 'Check logs'
@@ -51,9 +52,57 @@ const createUser = async (req = request, res = response) => {
     }
 
 }
+// Create New User
+
+// Login
+const logIn = async(req = request, res = response) => {
+
+    const {email, password} = req.body;
+    
+    try {
+
+        // Validate if email exist
+        const userDB = await User.findOne({email});
+        if(!userDB){
+            return res.status(404).json({
+                ok: false,
+                msg: 'Credentials are incorrect try again with valid credentials'
+            });
+        }
+        // Validate if email exist
+
+        // Valid Password
+        const validPassword = bcrypt.compareSync(password, userDB.password);
+        if (!validPassword) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'Credentials are incorrect try again with valid credentials'
+            });
+        }
+        // Valid Password
+
+        const token = await generateJWT(userDB.id);
+
+        res.json({
+            ok: true,
+            user: userDB,
+            token
+        });
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Check logs'
+        });
+    }
+
+};
+// Login
 
 // Export Modules
 module.exports = {
-    createUser
+    createUser,
+    logIn
 }
 // Export Modules
