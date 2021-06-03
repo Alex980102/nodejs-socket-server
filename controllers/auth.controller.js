@@ -4,7 +4,8 @@ const bcrypt = require("bcryptjs");
 // Third party imports
 
 // Local imports
-const User = require('../models/user.model')
+const User = require('../models/user.model');
+const { generateJWT } = require("../helpers/jwt.helper");
 // Local Imports
 
 const createUser = async (req = request, res = response) => {
@@ -28,11 +29,17 @@ const createUser = async (req = request, res = response) => {
         user.password = bcrypt.hashSync(password, salt);
         // Encrypt password
 
+        // Save user model on database
         await user.save();
+        // Save user model on database
+
+        // Generate JWT
+        const token = await generateJWT(user.id);
     
         res.json({
             ok: true,
-            user
+            user,
+            token
         });
 
     } catch (error) {
