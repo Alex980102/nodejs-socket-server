@@ -33,7 +33,6 @@ app.use(express.static(publicPath));
 // Public Path
 
 // Routes
-// TODO: Create Auth routes
 app.use('/api/login', require('./routes/auth.routes'));
 // Routes
 
