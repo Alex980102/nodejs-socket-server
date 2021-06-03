@@ -100,9 +100,19 @@ const logIn = async(req = request, res = response) => {
 };
 // Login
 
+// Renew Token
+const renewToken = async(req = request, res = response) => {
+    res.json({
+        ok: true,
+        msg: req.uid
+    });
+}
+// Renew Token
+
 // Export Modules
 module.exports = {
     createUser,
-    logIn
+    logIn,
+    renewToken
 }
 // Export Modules

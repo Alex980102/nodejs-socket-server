@@ -8,8 +8,9 @@ const { check } = require('express-validator');
 // Third party imports
 
 // Local imports
-const {createUser, logIn} = require('../controllers/auth.controller');
+const {createUser, logIn, renewToken} = require('../controllers/auth.controller');
 const { validateFields } = require('../middlewares/validate-fields.middleware');
+const { validateJWT } = require('../middlewares/validate-jwt.middleware');
 // Local imports
 
 // Const and variable declarations
@@ -32,6 +33,10 @@ router.post('/', [
     validateFields
 ],logIn)
 // Login
+
+// Renew Token
+router.get('/renew', validateJWT,renewToken);
+// Renew Token
 
 // Export Modules
 module.exports = router;
