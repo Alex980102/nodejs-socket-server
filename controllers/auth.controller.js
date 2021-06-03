@@ -1,5 +1,6 @@
 // Third party imports
 const {response, request} = require("express");
+const bcrypt = require("bcryptjs");
 // Third party imports
 
 // Local imports
@@ -8,7 +9,7 @@ const User = require('../models/user.model')
 
 const createUser = async (req = request, res = response) => {
 
-    const {email} = req.body;
+    const {email, password} = req.body;
     
     try {   
 
@@ -21,6 +22,12 @@ const createUser = async (req = request, res = response) => {
         }
 
         const user = new User(req.body);
+
+        // Encrypt password
+        const salt = bcrypt.genSaltSync();
+        user.password = bcrypt.hashSync(password, salt);
+        // Encrypt password
+
         await user.save();
     
         res.json({
