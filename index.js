@@ -2,12 +2,12 @@
 const express = require('express');
 const path = require('path');
 require('dotenv').config();
+const cors = require('cors');
 // Third party imports
 
 // Local Imports
 const {dbConnection} = require('./database/config');
 // Local Imports
-
 
 // DB Configuration
 dbConnection();
@@ -16,6 +16,10 @@ dbConnection();
 // Express App
 const app = express();
 // Express App
+
+// CORS Configuration
+app.use(cors());
+// CORS Configuration
 
 // Reading and parsing the body
 app.use(express.json());
