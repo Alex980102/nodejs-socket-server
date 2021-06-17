@@ -19,6 +19,7 @@ const createUser = async (req = request, res = response) => {
         if(emailExist){
             return res.status(400).json({
                 ok: false,
+                title: 'Invalid Email',
                 msg: 'Credentials are incorrect try again with valid credentials'
             })
         }
