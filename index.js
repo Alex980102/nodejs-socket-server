@@ -7,23 +7,21 @@ const cors = require('cors');
 
 // Local Imports
 const {dbConnection} = require('./database/config');
-// Local Imports
+
 
 // DB Configuration
 dbConnection();
-// DB Configuration
+
 
 // Express App
 const app = express();
-// Express App
+
 
 // CORS Configuration
 app.use(cors());
-// CORS Configuration
 
 // Reading and parsing the body
 app.use(express.json());
-// Reading and parsing the body
 
 // Node Socket Server
 const server = require('http').createServer(app);
