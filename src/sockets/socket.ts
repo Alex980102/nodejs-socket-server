@@ -1,6 +1,7 @@
 import checkJWT  from "../helpers/check.helper";
 const {io} = require('../app');
 import {userConnected, userDisconnected} from "../controllers/socket.controller"
+import payload from "Payload";
 
 // Socket Messages
 io.on('connection',(client: any) => {
@@ -17,7 +18,15 @@ io.on('connection',(client: any) => {
     // Cliente autenticado
     userConnected(uid)
 
-    console.log('Cliente autenticado');
+    // Ingresar al usuario a una sala especifica
+    // Sala Global, client.id
+    client.join(uid);
+
+    // Escuchar del cliente el mensaje personal
+    client.on('personal-message', (payload: any) => {
+        console.log(payload);
+        
+    })
     
 
     client.on('disconnect', () => {
