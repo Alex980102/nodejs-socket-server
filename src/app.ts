@@ -6,6 +6,7 @@ dotenv.config();
 import auth from './routes/auth.routes'
 
 import dbConnection from './database/config';
+import router from './routes/users.routes';
 
 dbConnection();
 
@@ -22,8 +23,9 @@ const publicPath = path.resolve(__dirname, '../public');
 app.use(express.static(publicPath));
 
 app.use('/api/login', auth);
+app.use('/api/users', router);
 
 server.listen(process.env.PORT, (err: string) => {
     if(err) throw new Error(err);
-    console.log('Corriendo en puerto 3000');
+    console.log(`Corriendo en puerto ${process.env.PORT}`);
 });
