@@ -1,6 +1,6 @@
 import checkJWT  from "../helpers/check.helper";
 const {io} = require('../app');
-import {userConnected, userDisconnected} from "../controllers/socket.controller"
+import {saveMessage, userConnected, userDisconnected} from "../controllers/socket.controller"
 import payload from "Payload";
 
 // Socket Messages
@@ -23,8 +23,9 @@ io.on('connection',(client: any) => {
     client.join(uid);
 
     // Escuchar del cliente el mensaje personal
-    client.on('personal-message', (payload: any) => {
+    client.on('personal-message', async(payload: any) => {
         console.log(payload);
+        await saveMessage(payload);
         io.to(payload.to).emit('personal-message', payload);
         
     })

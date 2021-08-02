@@ -8,10 +8,9 @@ import { Document, Model, model, Schema } from 'mongoose';
  * @param online:boolean
  */
 export interface IMessage extends Document {
-    name: string
-    email: string;
-    password: string;
-    online: boolean;
+    from: string;
+    to: string;
+    message: string;
 }
 
 const MessageSchema: any = new Schema({
