@@ -7,6 +7,7 @@ import auth from './routes/auth.routes'
 
 import dbConnection from './database/config';
 import router from './routes/users.routes';
+import messagesRoutes from './routes/messages.routes';
 
 dbConnection();
 
@@ -24,6 +25,7 @@ app.use(express.static(publicPath));
 
 app.use('/api/login', auth);
 app.use('/api/users', router);
+app.use('/api/messages', messagesRoutes);
 
 server.listen(process.env.PORT, (err: string) => {
     if(err) throw new Error(err);
