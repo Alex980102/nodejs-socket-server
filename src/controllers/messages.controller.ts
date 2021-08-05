@@ -13,7 +13,7 @@ export const obtainChat = async (req: any, res: any) => {
 
     res.json({
         ok: true,
-        last30
+        messages:last30
     });
 };
 
